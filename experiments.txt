@@ -1,0 +1,29 @@
+GPT2:
+NONE	GPT2
+  Perplexity: python main.py --only_match_eval False --eval_batch_size 10 --skip_train. Then look at "lm_nocc_perplexity" in the logs.
+  Geneval: python main.py --cc_type none --geneval --skip_train --skip_eval
+PRED/PRED	GPT2
+  Both: python main.py --geneval
+ORA/PRED	GPT2
+  Both: python main.py --geneval --tune_lm_with_planner false --skip_lm_load false
+ORA/ORA	GPT2
+  Perplexity: python main.py --only_match_eval False --eval_batch_size 10 --tune_lm_with_planner false --skip_lm_load false. Then look at "lm_oracle_perplexity" in the logs.
+  Geneval: not applicable
+FIX/FIX	GPT2
+  Both: python main.py --fixed_code --geneval
+
+Olmo is the same, but specify --base_model olmo
+NONE	OLMO
+  Perplexity: python main.py --only_match_eval False --eval_batch_size 10 --skip_train --base_model olmo. Then look at "lm_nocc_perplexity" in the logs.
+  Geneval: python main.py --cc_type none --geneval --skip_train --skip_eval --base_model olmo
+PRED/PRED	OLMO
+  Both: python main.py --geneval --base_model olmo
+ORA/PRED	OLMO
+  Both: python main.py --geneval --tune_lm_with_planner false --skip_lm_load false --base_model olmo
+ORA/ORA	OLMO
+  Perplexity: python main.py --only_match_eval False --eval_batch_size 10 --tune_lm_with_planner false --skip_lm_load false --base_model olmo. Then look at "lm_oracle_perplexity" in the logs.
+  Geneval: not applicable
+FIX/FIX	OLMO
+  Both: python main.py --fixed_code --geneval --base_model olmo
+
+Note that you can re-use checkpoints by specifying --mz_ckpt_wid (for the planner), --lm_ckpt_wid and --plm_ckpt_wid (for oracle-code trained or predicted-code-trained LM).
